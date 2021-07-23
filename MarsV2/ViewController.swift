@@ -19,14 +19,30 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Set the view's delegate
         sceneView.delegate = self
         
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
         
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let sphere = SCNSphere(radius: 0.2)
+        let material = SCNMaterial()
         
-        // Set the scene to the view
-        sceneView.scene = scene
+        material.diffuse.contents = UIImage(named: "art.scnassets/earth_night.png")
+        
+        sphere.materials = [material]
+        let node = SCNNode()
+        
+        node.position = SCNVector3(x: 0, y: 0.1, z: -0.5)
+        
+        node.geometry = sphere
+        sceneView.scene.rootNode.addChildNode(node)
+        sceneView.autoenablesDefaultLighting = true
+        
+        
+//        // Show statistics such as fps and timing information
+//        sceneView.showsStatistics = true
+//
+//        // Create a new scene
+//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+//
+//        // Set the scene to the view
+//        sceneView.scene = scene
     }
     
     override func viewWillAppear(_ animated: Bool) {
